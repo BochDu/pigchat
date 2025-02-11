@@ -1,7 +1,7 @@
 import pigtime
 import pigchat
 
-#联网获取日期
+#获取本地日期
 timestamp = pigtime.get_pig_timestamp()
 
 #设置指定日期
