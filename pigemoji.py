@@ -33,13 +33,5 @@ def boar_emoji_to_number(emoji_str):
     return result
 
 
-# text = "949334194299888995920657884197254696884441744796"
-# print(text)
-# text = number_to_boar_emoji(text)
-# print(text)
-# text = boar_emoji_to_number(text)
-# print(text)
-
-
 
 
