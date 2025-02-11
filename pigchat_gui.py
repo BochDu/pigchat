@@ -18,11 +18,10 @@ def decrypt_text():
 
 root = tk.Tk()
 root.title("Pigchat Converter")
+root.minsize(400, 300)
 
 def make_expanding(widget):
     widget.pack(expand=True, fill='both')
-
-root.geometry("400x300")
 
 entry = tk.Text(root, width=50, height=15, wrap=tk.WORD)  
 make_expanding(entry)
@@ -37,6 +36,7 @@ decrypt_button = tk.Button(button_frame, text="Decrypt", command=decrypt_text, b
 decrypt_button.pack(side=tk.LEFT, padx=5, expand=True, fill='both')
 
 root.mainloop()
+
 
 
 
