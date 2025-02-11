@@ -4,6 +4,9 @@ import pigchat
 #联网获取日期
 timestamp = pigtime.get_pig_timestamp()
 
+#设置指定日期
+# timestamp = pigtime.get_pig_timestamp(2024,1,1)
+
 input_str = "忠诚"
 
 # 数字加密
