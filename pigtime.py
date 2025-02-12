@@ -1,3 +1,4 @@
+import pytz
 from datetime import datetime, timezone, timedelta
 
 # 生成野猪时间戳，若有传参采用传参，没有传参自动获取
@@ -6,7 +7,10 @@ def get_pig_timestamp(year=None, month=None, day=None):
         print("传入日期:", year, "年", month, "月", day, "日")
     else:
         current_date = datetime.now()
-        year, month, day = current_date.year, current_date.month, current_date.day
+        # 将当前时间转换为北京时区
+        target_timezone = pytz.timezone('Asia/Shanghai')
+        current_date_beijing = current_date.astimezone(target_timezone)
+        year, month, day = current_date_beijing.year, current_date_beijing.month, current_date_beijing.day
         print("本地日期:", year, "年", month, "月", day, "日")
         
     hour = year % 10
@@ -16,6 +20,6 @@ def get_pig_timestamp(year=None, month=None, day=None):
     
     beijing_timezone = timezone(timedelta(hours=8))
     beijing_time = beijing_time.replace(tzinfo=beijing_timezone)
-    utc_timestamp = beijing_time.timestamp()
+    pig_timestamp = beijing_time.timestamp()
 
-    return utc_timestamp
+    return pig_timestamp
