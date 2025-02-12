@@ -11,6 +11,12 @@ boar_emoji_dict = {
     '9': '🍃'
 }
 
+def is_only_boar_emoji(input_str):
+    for char in input_str:
+        if char not in boar_emoji_dict.values():
+            return False
+    return True
+
 def number_to_boar_emoji(number_str):
     result = ""
     for digit in number_str:

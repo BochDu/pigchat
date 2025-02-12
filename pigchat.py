@@ -94,14 +94,24 @@ def pigchat_num_decrypt(timestamp, text):
     return decrypted_data
 
 def pigchat_emoji_encrypt(timestamp, input_str):
-    pignum = pigchat_num_encrypt(timestamp,input_str)
+    try:
+        input_str.encode('utf-8')
+    except UnicodeEncodeError:
+        return input_str
+
+    pignum = pigchat_num_encrypt(timestamp, input_str)
     encrypted_data = pigemoji.number_to_boar_emoji(pignum)
     return encrypted_data
 
+
 def pigchat_emoji_decrypt(timestamp, input_str):
-    pignum = pigemoji.boar_emoji_to_number(input_str)
-    decrypted_data = pigchat_num_decrypt(timestamp,pignum)
-    return decrypted_data
+    if pigemoji.is_only_boar_emoji(input_str):
+        pignum = pigemoji.boar_emoji_to_number(input_str)
+        decrypted_data = pigchat_num_decrypt(timestamp,pignum)
+        return decrypted_data
+    else:
+        return input_str
+
 
 
 
