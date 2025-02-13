@@ -4,24 +4,34 @@ import pigchat
 
 def encrypt_text():
     input_text = entry.get("1.0", tk.END).strip()  
-    timestamp = pigtime.get_pig_timestamp()
+    timestamp = pigtime.get_pig_timestamp(password=password_var.get())
     output_text = pigchat.pigchat_emoji_encrypt(timestamp, input_text)
     entry.delete("1.0", tk.END)  
     entry.insert("1.0", output_text)
 
 def decrypt_text():
     input_text = entry.get("1.0", tk.END).strip()  
-    timestamp = pigtime.get_pig_timestamp()
+    timestamp = pigtime.get_pig_timestamp(password=password_var.get())
     output_text = pigchat.pigchat_emoji_decrypt(timestamp, input_text)
     entry.delete("1.0", tk.END)  
     entry.insert("1.0", output_text)
 
 root = tk.Tk()
 root.title("Pigchat Converter")
-root.minsize(400, 300)
+root.minsize(600, 400)
 
 def make_expanding(widget):
     widget.pack(expand=True, fill='both')
+
+password_frame = tk.Frame(root)
+password_frame.pack(side=tk.TOP, anchor=tk.NE)
+
+password_label = tk.Label(password_frame, text="Private Key :")
+password_label.pack(side=tk.LEFT)
+password_var = tk.StringVar()
+password_entry = tk.Entry(password_frame, show="", textvariable=password_var)
+password_entry.pack(side=tk.RIGHT, padx=5, pady=5)
+
 
 entry = tk.Text(root, width=50, height=15, wrap=tk.WORD)  
 make_expanding(entry)

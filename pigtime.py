@@ -1,8 +1,8 @@
 import pytz
+import hashlib
 from datetime import datetime, timezone, timedelta
 
-# 生成野猪时间戳，若有传参采用传参，没有传参自动获取
-def get_pig_timestamp(year=None, month=None, day=None):
+def get_pig_timestamp(year=None, month=None, day=None, password=None):
     if year and month and day:
         print("传入日期:", year, "年", month, "月", day, "日")
     else:
@@ -20,6 +20,16 @@ def get_pig_timestamp(year=None, month=None, day=None):
     
     beijing_timezone = timezone(timedelta(hours=8))
     beijing_time = beijing_time.replace(tzinfo=beijing_timezone)
+    
+    if password:
+        hash_object = hashlib.sha256(password.encode())
+        hash_hex = hash_object.hexdigest()
+        hash_int = int(hash_hex, 16)
+        
+        # 将偏移量加到时间上
+        offset = hash_int % 10000
+        beijing_time = beijing_time + timedelta(seconds=offset)
+    
     pig_timestamp = beijing_time.timestamp()
 
     return pig_timestamp

@@ -44,12 +44,14 @@ def utf8_to_binary(input_str):
     return utf8_binary
 
 def binary_to_utf8(binary_str):
-    # 将二进制字符串转换为字节数据
-    bytes_list = [int(binary_str[i:i+8], 2) for i in range(0, len(binary_str), 8)]
-    utf8_bytes = bytes(bytes_list)
+    try:
+        bytes_list = [int(binary_str[i:i+8], 2) for i in range(0, len(binary_str), 8)]
+        utf8_bytes = bytes(bytes_list)
 
-    # 将字节数据解码为字符串
-    utf8_str = utf8_bytes.decode('utf-8')
+        utf8_str = utf8_bytes.decode('utf-8')
+    except UnicodeDecodeError as e:
+        print("decode utf-8 error")
+        utf8_str = ""
 
     return utf8_str
 
